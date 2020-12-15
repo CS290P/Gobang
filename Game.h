@@ -2,12 +2,12 @@
 #define SIZE 15
 class Game
 {
-private:
-	int count = 1;
-	int size;
-	int checkerboard[15][15];
 public:
+	int humanFirst = 1;
+	int count = 1;
+	int checkerboard[15][15];
 	Game(int humanFirst = 1);
+	Game();
 	int humanPlay(int x, int y);
 	int aiPlay();
 };

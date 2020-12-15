@@ -12,7 +12,6 @@
 
 #include "GobangDoc.h"
 #include "GobangView.h"
-
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -34,6 +33,7 @@ END_MESSAGE_MAP()
 
 CGobangView::CGobangView() noexcept
 {
+	game = new Game(1);
 	// TODO: 在此处添加构造代码
 
 }
@@ -51,24 +51,52 @@ BOOL CGobangView::PreCreateWindow(CREATESTRUCT& cs)
 }
 
 // CGobangView 绘图
+void CGobangView::fill(int x, int y, int player) {
+	CPoint pt;
+	pt.x = x;
+	pt.y = y;
+	CClientDC ClientDC(this);
+	CBrush brush, * oldbrush;
+	if (player > 0) {
+		brush.CreateSolidBrush(RGB(0, 0, 0));
+	}
+	else {
+		brush.CreateSolidBrush(RGB(200, 200, 200));
+	}
+	oldbrush = ClientDC.SelectObject(&brush);
+	ClientDC.Ellipse(pt.x - 15, pt.y - 15, pt.x + 15, pt.y + 15);
+	ClientDC.SelectObject(oldbrush);
 
-void CGobangView::OnDraw(CDC* /*pDC*/)
+}
+void CGobangView::OnDraw(CDC* pDC)
 {
 	CGobangDoc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
-
 
 	//获得窗口的设备描述表
 	HDC hdc;
 	hdc = ::GetDC(m_hWnd);
 
-	//移动到线条的起点位置
-	MoveToEx(hdc, 10, 10, NULL);
 
-	//划线，
-	LineTo(hdc, 800,rand()%800);
-
-
+	for (int i = 1; i <= 15; i++) {
+		//移动到线条的起点位置
+		MoveToEx(hdc, 20, i * 50, NULL);
+		//划线，
+		LineTo(hdc, 770, i * 50);
+	}
+	for (int i = 1; i <= 15; i++) {
+		//移动到线条的起点位置
+		MoveToEx(hdc, i * 50, 20, NULL);
+		//划线，
+		LineTo(hdc, i * 50, 770);
+	}
+	for (int i = 0; i < SIZE; i++) {
+		for (int j = 0; j < SIZE; j++) {
+			if (game->checkerboard[i][j] * game->humanFirst != 0) {
+				fill((i + 1) * 50, (j + 1) * 50, game->checkerboard[i][j] * game->humanFirst);
+			}
+		}
+	}
 	if (!pDoc)
 		return;
 
@@ -122,6 +150,20 @@ CGobangDoc* CGobangView::GetDocument() const // 非调试版本是内联的
 void CGobangView::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	// TODO: 在此添加消息处理程序代码和/或调用默认值
+	//game->humanPlay();
+	// 0,0 50,50  
+	for (int i = 0; i < SIZE; i++) {
+		for (int j = 0; j < SIZE; j++) {
+			int beginx = (i + 1) * 50 - 25;
+			int endx = (i + 1) * 50 + 25;
+			int beginy = (j + 1) * 50 - 25;
+			int endy = (j + 1) * 50 + 25;
+			if (point.x > beginx && point.x <= endx && point.y > beginy && point.y <= endy) {
+				game->humanPlay(i, j);
+			}
+		}
+	}
+	game->aiPlay();
 	this->Invalidate(1);
 	CView::OnLButtonDown(nFlags, point);
 }

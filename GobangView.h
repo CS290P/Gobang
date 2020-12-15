@@ -3,8 +3,7 @@
 //
 
 #pragma once
-
-
+#include "Game.h"
 class CGobangView : public CView
 {
 protected: // 仅从序列化创建
@@ -14,7 +13,7 @@ protected: // 仅从序列化创建
 // 特性
 public:
 	CGobangDoc* GetDocument() const;
-
+	void fill(int x, int y,int player);
 // 操作
 public:
 
@@ -42,6 +41,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	Game* game;
 };
 
 #ifndef _DEBUG  // GobangView.cpp 中的调试版本
