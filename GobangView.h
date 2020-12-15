@@ -13,7 +13,7 @@ protected: // 仅从序列化创建
 // 特性
 public:
 	CGobangDoc* GetDocument() const;
-	void fill(int x, int y,int player);
+	void fill(int x, int y,int player,int end=0);
 // 操作
 public:
 
