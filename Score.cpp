@@ -4,6 +4,6 @@ Score::Score(int** p, int size) {
 	map = p;
 	this->size = size;
 }
-int Score::getScore(int x, int y) {
+int Score::getScore(int x, int y,int id) {
 
 }

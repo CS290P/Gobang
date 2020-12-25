@@ -5,6 +5,6 @@ public:
 	int** map;
 	int size;
 	Score(int** p, int size) {};
-	int getScore(int x,int y);
+	int getScore(int x,int y,int id);
 };
 
