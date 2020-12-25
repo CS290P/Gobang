@@ -10,5 +10,6 @@ public:
 	Game();
 	int humanPlay(int x, int y);
 	int aiPlay();
+	int isLive3(int x,int y);
 };
 

@@ -31,4 +31,11 @@ int Game::aiPlay() {
 	count++;
 	return 0;
 }
+
+
+int Game::isLive3(int x, int y) {
+	if (checkerboard[x][y] != 0) {
+		throw;
+	}
+}
 Game::Game() {}
