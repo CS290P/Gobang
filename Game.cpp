@@ -7,7 +7,7 @@ Game::Game(int humanFirst) {
 		}
 	}
 	this->humanFirst = humanFirst;
-	if (humanFirst == 0) {
+	if (humanFirst < 0) {
 		aiPlay();
 	}
 }
@@ -33,9 +33,4 @@ int Game::aiPlay() {
 }
 
 
-int Game::isLive3(int x, int y) {
-	if (checkerboard[x][y] != 0) {
-		throw;
-	}
-}
 Game::Game() {}
