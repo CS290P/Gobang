@@ -1,12 +1,12 @@
 #include "pch.h"
 #include "Score.h"
-int Board[15][15];   
+
 Score::Score(int** p, int size) {
-	map = p;
 	this->size = size;
-	
+	Board = p;
 	// + - 0
 }
+
 int Score::getScore(int x, int y, int id) { 
 	// id= 1  +  id= -1 - 
 	int score = 0;
@@ -19,6 +19,7 @@ int Score::getScore(int x, int y, int id) {
 	//如果是A4，下一步是自己下必胜，对方没有连五、冲四、活四，那么自己必胜
 	score = 25000 * numof_A4(1) - 25000 * numof_A4(-1) + 5201 * numof_P4(1) - 5201 * numof_P4(-1) + 4991 * numof_A3(1) - 4991 * numof_A3(-1) + 410 * numof_S3(1)
 		- 410 * numof_S3(-1) + 450 * numof_A2(1) - 450 * numof_A2(-1) + 70 * numof_S2(1) - 70 * numof_S2(-1) + 30 * numof_A1(1) - 30 * numof_A1(-1);
+	return score;
 }
 
 int Score::numof_C5(int id) {

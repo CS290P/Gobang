@@ -45,6 +45,12 @@
     <ClInclude Include="Score.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="ChosePlace.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Minimax.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Gobang.cpp">
@@ -66,6 +72,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Score.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ChosePlace.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MiniMax.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

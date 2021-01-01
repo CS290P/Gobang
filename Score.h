@@ -11,9 +11,9 @@
 class Score
 {
 public:
-	int** map;
 	int size;
-	Score(int** p, int size) {};
+	int** Board;
+	Score(int** p, int size);
 	int getScore(int x,int y,int id);
 	int Judgeif_A3(int x, int y, int id) {};
 	int Score::numof_C5(int id);
