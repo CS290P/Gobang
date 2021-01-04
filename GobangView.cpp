@@ -93,43 +93,11 @@ void CGobangView::OnDraw(CDC* pDC)
 		//划线，
 		LineTo(hdc, i * margin1, margin1*16);
 	}
-	int maxi = 0, maxj = 0;	
-	int max = 0;
+	
 	for (int i = 0; i < SIZE; i++) {
 		for (int j = 0; j < SIZE; j++) {
-			if (game->checkerboard[i][j] > max) {
-				maxi = i;
-				maxj = j;
-				max = game->checkerboard[i][j];
-			}
-		}
-	}
-	if (max != 0) {
-		//fill((maxi + 1) * margin1, (maxj + 1) * margin1, game->checkerboard[maxi][maxj] * game->humanFirst,1);
-	}
-	int mini = 0, minj = 0;
-	int min = 0;
-	for (int i = 0; i < SIZE; i++) {
-		for (int j = 0; j < SIZE; j++) {
-			if (game->checkerboard[i][j] < min) {
-				mini = i;
-				minj = j;
-				min = game->checkerboard[i][j];
-			}
-		}
-	}
-	if (min != 0) {
-		fill((mini + 1) * margin1, (minj + 1) * margin1, game->checkerboard[mini][minj] * game->humanFirst, 1);
-	}
-
-
-
-
-
-	for (int i = 0; i < SIZE; i++) {
-		for (int j = 0; j < SIZE; j++) {
-			if (game->checkerboard[i][j] * game->humanFirst != 0) {
-				fill((i + 1) * margin1, (j + 1) * margin1, game->checkerboard[i][j] * game->humanFirst);
+			if (game->checkBoard[i][j] * game->humanFirst != 0) {
+				fill((i + 1) * margin1, (j + 1) * margin1, game->checkBoard[i][j] * game->humanFirst);
 			}
 		}
 	}
@@ -200,9 +168,16 @@ void CGobangView::OnLButtonDown(UINT nFlags, CPoint point)
 			}
 		}
 	}
-	if (hunmanPlaySuccess) {
-		game->aiPlay();
-	}
 	this->Invalidate(1);
+	OnDraw(NULL);
+	if (hunmanPlaySuccess) {
+		int c=game->aiPlay();
+		if (c != 0) {
+			CString cstr = CString("again?");
+			LPCTSTR pStr = LPCTSTR(cstr);
+			MessageBox(pStr);
+		}
+	}
+	
 	CView::OnLButtonDown(nFlags, point);
 }

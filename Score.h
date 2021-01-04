@@ -17,6 +17,7 @@ struct Chess
 class Score
 {
 public:
+	Score() {}
 	int** Board;
 	int score;
 	Chess ai_next_move;
